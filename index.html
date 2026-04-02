@@ -5,13 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Primeiro Projeto</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module">
+    import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
+
+    const application = Application.start()
+
+    application.register("menu", class extends Controller {
+        static targets = ["nav"]
+
+        toggle() {
+            this.navTarget.classList.toggle("hidden")
+        }
+    })
+</script>
 </head>
-<body class="bg-gray-100 p-12">
-    <h1 class="text-3xl font-bold text-gray-900 mb-2">Olá, mundo!</h1>
-    <p class="text-base text-gray-500">Meu primeiro projeto como Design Engineer.</p>
-    <div class="bg-white rounded-xl shadow p-6 mt-8 max-w-sm">
-    <h2 class="text-lg font-semibold text-gray-800 mb-1">Meu primeiro card</h2>
-    <p class="text-sm text-gray-500">Estilizado com Tailwind CSS.</p>
-</div>
+<body class="bg-gray-100">
+
+    <!-- Navbar com Stimulus -->
+    <header data-controller="menu" class="bg-white px-12 py-4 flex items-center justify-between">
+        <p class="font-bold text-gray-900">Felipe Sitja</p>
+
+        <!-- Botão mobile -->
+        <button data-action="click->menu#toggle" class="text-gray-600 font-medium hover:text-purple-600">
+            Menu
+        </button>
+
+        <!-- Nav que aparece e desaparece -->
+        <nav data-menu-target="nav" class="hidden absolute top-16 left-0 w-full bg-white px-12 py-6 shadow flex flex-col gap-4">
+            <a href="#" class="text-gray-700 hover:text-purple-600">Home</a>
+            <a href="#" class="text-gray-700 hover:text-purple-600">Sobre</a>
+            <a href="#" class="text-gray-700 hover:text-purple-600">Projetos</a>
+        </nav>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="bg-white px-12 py-20">
+        <p class="text-sm font-medium text-purple-600 mb-3">Design Engineer</p>
+        <h1 class="text-5xl font-bold text-gray-900 mb-6">Olá, eu sou<br>Felipe Sitja</h1>
+        <p class="text-lg text-gray-500 max-w-lg mb-8">UX e UI Designer em transição para Design Engineer, construindo interfaces acessíveis e bem desenvolvidas.</p>
+        <a href="#" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700">Ver projetos</a>
+    </section>
+
+    <!-- Card -->
+    <div class="px-12 mt-8">
+        <div class="bg-white rounded-xl shadow p-6 max-w-sm">
+            <h2 class="text-lg font-semibold text-gray-800 mb-1">Meu primeiro card</h2>
+            <p class="text-sm text-gray-500">Estilizado com Tailwind CSS.</p>
+        </div>
+    </div>
+
 </body>
 </html>
